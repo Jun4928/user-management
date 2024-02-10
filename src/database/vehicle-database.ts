@@ -11,7 +11,7 @@ export type UpdateVehicleData = Omit<Vehicle, "id">;
 
 export const TARGET_NOT_FOUND = "TARGET_NOT_FOUND" as const;
 
-export type Result = {
+type Result = {
   succeed: boolean;
   reason: typeof TARGET_NOT_FOUND | null;
 };
@@ -34,7 +34,7 @@ export interface VehicleDatabase {
   clear(): Promise<void>;
 }
 
-export class InMemory implements VehicleDatabase {
+export class InMemoryVehicle implements VehicleDatabase {
   private vehicles: UserVehicle[] = [];
 
   constructor() {}
@@ -120,4 +120,4 @@ export class InMemory implements VehicleDatabase {
   }
 }
 
-export const vehicleDatabase = new InMemory();
+export const vehicleDatabase = new InMemoryVehicle();

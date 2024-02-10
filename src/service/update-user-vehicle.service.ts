@@ -1,5 +1,4 @@
 import {
-  Result,
   TARGET_NOT_FOUND,
   UpdateVehicleData,
   VehicleDatabase,
