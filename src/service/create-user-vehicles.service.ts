@@ -1,19 +1,19 @@
 import {
   CreateVehicleData,
-  UserVehicle,
   VehicleDatabase,
 } from "../database/vehicle-database";
+import { Vehicle } from "../types/vehicle";
 
 type CreateUserVehiclesInput = {
   userId: number;
   vehicle: CreateVehicleData;
 };
-type CreateUserVehiclesOutput = Promise<UserVehicle>;
+type CreateUserVehiclesOutput = Promise<Vehicle>;
 
 export async function createUserVehicles(
   params: CreateUserVehiclesInput,
   vehicleDatabase: VehicleDatabase,
 ): Promise<CreateUserVehiclesOutput> {
   const created = await vehicleDatabase.create(params.userId, params.vehicle);
-  return created;
+  return created.vehicle;
 }
