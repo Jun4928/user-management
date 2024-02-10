@@ -1,11 +1,13 @@
 import { Vehicle } from "../types/vehicle";
 
-type UserVehicle = {
+export type UserVehicle = {
   userId: number;
-  vehicle: {
-    id: number;
-  } & Vehicle;
+  vehicle: Vehicle;
 };
+
+export type CreateVehicleData = Omit<Vehicle, "id">;
+
+export type UpdateVehicleData = Omit<Vehicle, "id">;
 
 type Result = {
   succeed: boolean;
@@ -17,18 +19,20 @@ export interface VehicleDatabase {
 
   getOne(userId: number, vehicleId: number): Promise<UserVehicle | null>;
 
-  create(userId: number, vehicle: Vehicle): Promise<UserVehicle>;
+  create(userId: number, vehicle: CreateVehicleData): Promise<UserVehicle>;
 
   updateOne(
     userId: number,
     vehicleId: number,
-    vehicle: Vehicle,
+    vehicle: UpdateVehicleData,
   ): Promise<UserVehicle | Result>;
 
   deleteOne(userId: number, vehicleId: number): Promise<Result>;
+
+  clear(): Promise<void>;
 }
 
-class InMemory implements VehicleDatabase {
+export class InMemory implements VehicleDatabase {
   private vehicles: UserVehicle[];
   private TARGET_NOT_FOUND = `TARGET_NOT_FOUND`;
 
@@ -48,7 +52,7 @@ class InMemory implements VehicleDatabase {
 
   async create(
     userId: number,
-    vehicle: Omit<Vehicle, "id">,
+    vehicle: CreateVehicleData,
   ): Promise<UserVehicle> {
     const data = {
       userId,
@@ -65,7 +69,7 @@ class InMemory implements VehicleDatabase {
   async updateOne(
     userId: number,
     vehicleId: number,
-    vehicle: Omit<Vehicle, "id">,
+    vehicle: UpdateVehicleData,
   ): Promise<UserVehicle | Result> {
     const found = this.findTarget(userId, vehicleId);
     if (found == -1) {
@@ -102,6 +106,10 @@ class InMemory implements VehicleDatabase {
       succeed: true,
       reason: null,
     };
+  }
+
+  async clear(): Promise<void> {
+    this.vehicles = [];
   }
 
   private findTarget(userId: number, vehicleId: number): number {
