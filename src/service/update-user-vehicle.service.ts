@@ -34,5 +34,5 @@ export async function updateUserVehicle(
     return updated.vehicle;
   }
 
-  throw new TypeError(`${updateUserVehicle.name} return type error`);
+  throw new TypeError(`${updateUserVehicle.name} unexpected type error`);
 }
