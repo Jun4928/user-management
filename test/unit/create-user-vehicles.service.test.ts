@@ -1,11 +1,14 @@
-import { InMemory, VehicleDatabase } from "../../src/database/vehicle-database";
+import {
+  InMemoryVehicle,
+  VehicleDatabase,
+} from "../../src/database/vehicle-database";
 import { createUserVehicles } from "../../src/service/create-user-vehicles.service";
 
 describe(`SERVICE: create-user-vehicles test`, () => {
   let vehicleDatabase: VehicleDatabase;
 
   beforeAll(() => {
-    vehicleDatabase = new InMemory();
+    vehicleDatabase = new InMemoryVehicle();
   });
 
   beforeEach(async () => {
