@@ -9,9 +9,11 @@ export type CreateVehicleData = Omit<Vehicle, "id">;
 
 export type UpdateVehicleData = Omit<Vehicle, "id">;
 
-type Result = {
+export const TARGET_NOT_FOUND = "TARGET_NOT_FOUND" as const;
+
+export type Result = {
   succeed: boolean;
-  reason: string | null;
+  reason: typeof TARGET_NOT_FOUND | null;
 };
 
 export interface VehicleDatabase {
@@ -34,7 +36,6 @@ export interface VehicleDatabase {
 
 export class InMemory implements VehicleDatabase {
   private vehicles: UserVehicle[] = [];
-  private TARGET_NOT_FOUND = `TARGET_NOT_FOUND`;
 
   constructor() {}
 
@@ -75,7 +76,7 @@ export class InMemory implements VehicleDatabase {
     if (found == -1) {
       return {
         succeed: false,
-        reason: this.TARGET_NOT_FOUND,
+        reason: TARGET_NOT_FOUND,
       };
     }
 
@@ -97,7 +98,7 @@ export class InMemory implements VehicleDatabase {
     if (found == -1) {
       return {
         succeed: false,
-        reason: this.TARGET_NOT_FOUND,
+        reason: TARGET_NOT_FOUND,
       };
     }
 
