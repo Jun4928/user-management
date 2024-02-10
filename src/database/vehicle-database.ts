@@ -33,7 +33,7 @@ export interface VehicleDatabase {
 }
 
 export class InMemory implements VehicleDatabase {
-  private vehicles: UserVehicle[];
+  private vehicles: UserVehicle[] = [];
   private TARGET_NOT_FOUND = `TARGET_NOT_FOUND`;
 
   constructor() {}

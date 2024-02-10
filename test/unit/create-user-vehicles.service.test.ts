@@ -1,4 +1,5 @@
 import { InMemory, VehicleDatabase } from "../../src/database/vehicle-database";
+import { createUserVehicles } from "../../src/service/create-user-vehicles.service";
 
 describe(`SERVICE: create-user-vehicles test`, () => {
   let vehicleDatabase: VehicleDatabase;
@@ -21,10 +22,15 @@ describe(`SERVICE: create-user-vehicles test`, () => {
       },
     };
 
-    const result = await vehicleDatabase.create(input.userId, input.vehicle);
+    const result = await createUserVehicles(
+      {
+        userId: input.userId,
+        vehicle: input.vehicle,
+      },
+      vehicleDatabase,
+    );
 
-    expect(result.userId).toBe(input.userId);
-    expect(result.vehicle.id).toBe(1);
-    expect(result.vehicle.model).toBe(input.vehicle.model);
+    expect(result.id).toBe(1);
+    expect(result.model).toBe(input.vehicle.model);
   });
 });
