@@ -12,7 +12,7 @@ type Result = {
 export interface UserDatabase {
   create(user: CreateUserData): Promise<User | Result>;
 
-  getOne(name: string, password: string): Promise<User | null>;
+  getOne(name: string): Promise<User | null>;
 }
 
 export class InMemoryUser implements UserDatabase {
@@ -37,10 +37,8 @@ export class InMemoryUser implements UserDatabase {
     return data;
   }
 
-  async getOne(name: string, password: string): Promise<User | null> {
-    return (
-      this.users.find((u) => u.name === name && u.password === password) ?? null
-    );
+  async getOne(name: string): Promise<User | null> {
+    return this.users.find((u) => u.name === name) ?? null;
   }
 
   private userDuplicated(name: string): boolean {
