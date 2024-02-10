@@ -13,7 +13,7 @@ type CreateUserVehiclesOutput = Promise<Vehicle>;
 export async function createUserVehicles(
   params: CreateUserVehiclesInput,
   vehicleDatabase: VehicleDatabase,
-): Promise<CreateUserVehiclesOutput> {
+): CreateUserVehiclesOutput {
   const created = await vehicleDatabase.create(params.userId, params.vehicle);
   return created.vehicle;
 }
