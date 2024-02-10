@@ -30,8 +30,6 @@ export interface VehicleDatabase {
   ): Promise<UserVehicle | Result>;
 
   deleteOne(userId: number, vehicleId: number): Promise<Result>;
-
-  clear(): Promise<void>;
 }
 
 export class InMemoryVehicle implements VehicleDatabase {
@@ -107,10 +105,6 @@ export class InMemoryVehicle implements VehicleDatabase {
       succeed: true,
       reason: null,
     };
-  }
-
-  async clear(): Promise<void> {
-    this.vehicles = [];
   }
 
   private findTarget(userId: number, vehicleId: number): number {
