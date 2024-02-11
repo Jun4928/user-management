@@ -24,14 +24,12 @@ export async function updateUserVehicle(
   );
 
   if ("succeed" in updated) {
-    if (updated.reason === TARGET_NOT_FOUND) {
+    if (!updated.succeed && updated.reason === TARGET_NOT_FOUND) {
       throw new Error(TARGET_NOT_FOUND);
     }
 
     throw new Error(`INTERNAL SERVER ERROR`);
-  } else if ("userId" in updated && "vehicle" in updated) {
-    return updated.vehicle;
   }
 
-  throw new TypeError(`${updateUserVehicle.name} unexpected type error`);
+  return updated.vehicle;
 }

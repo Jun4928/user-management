@@ -11,10 +11,6 @@ describe(`SERVICE: create-user-vehicles test`, () => {
     vehicleDatabase = new InMemoryVehicle();
   });
 
-  beforeEach(async () => {
-    await vehicleDatabase.clear();
-  });
-
   test(`create an item, returns vehicle`, async () => {
     const input = {
       userId: 1,
