@@ -13,7 +13,7 @@ describe(`SERVICE: create-user test`, () => {
     userDatabase = new InMemoryUser();
   });
 
-  test(`create an item, returns vehicle`, async () => {
+  test(`create an item, returns user`, async () => {
     const input = {
       name: "awesome",
       password: "cool",
