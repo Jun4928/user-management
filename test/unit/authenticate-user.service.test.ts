@@ -1,7 +1,6 @@
 import {
   UserDatabase,
-  InMemoryUser,
-  USER_DUPLICATED,
+  InMemoryUserImpl,
 } from "../../src/database/user-database";
 import { createUser } from "../../src/service/create-user.service";
 import { authenticateUser } from "../../src/service/authenticate-user.service";
@@ -10,7 +9,7 @@ describe(`SERVICE: create-user test`, () => {
   let userDatabase: UserDatabase;
 
   beforeEach(() => {
-    userDatabase = new InMemoryUser();
+    userDatabase = new InMemoryUserImpl();
   });
 
   test(`create an item, successfully authenticate the user`, async () => {

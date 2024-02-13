@@ -1,5 +1,5 @@
 import {
-  InMemoryVehicle,
+  InMemoryVehicleImpl,
   TARGET_NOT_FOUND,
   VehicleDatabase,
 } from "../../src/database/vehicle-database";
@@ -9,7 +9,7 @@ describe(`SERVICE: update-user-vehicles test`, () => {
   let vehicleDatabase: VehicleDatabase;
 
   beforeAll(async () => {
-    vehicleDatabase = new InMemoryVehicle();
+    vehicleDatabase = new InMemoryVehicleImpl();
 
     const input = [
       {

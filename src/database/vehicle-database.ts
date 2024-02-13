@@ -32,7 +32,7 @@ export interface VehicleDatabase {
   deleteOne(userId: number, vehicleId: number): Promise<Result>;
 }
 
-export class InMemoryVehicle implements VehicleDatabase {
+export class InMemoryVehicleImpl implements VehicleDatabase {
   private vehicles: UserVehicle[] = [];
 
   constructor() {}
@@ -114,4 +114,4 @@ export class InMemoryVehicle implements VehicleDatabase {
   }
 }
 
-export const vehicleDatabase = new InMemoryVehicle();
+export const InMemoryVehicle = new InMemoryVehicleImpl();
