@@ -1,7 +1,7 @@
 import { JWT_SECRET_KEY } from "../constant";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-interface UserJWTPayload extends JwtPayload {
+export interface UserJWTPayload extends JwtPayload {
   id: number;
   name: string;
 }
@@ -29,7 +29,7 @@ class JWTImpl implements JWT {
       | UserJWTPayload
       | string;
     if (typeof result === "string") {
-      throw TypeError("should be object");
+      throw new TypeError("should be object");
     }
 
     return result;
