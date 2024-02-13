@@ -1,5 +1,5 @@
 import {
-  InMemoryVehicle,
+  InMemoryVehicleImpl,
   VehicleDatabase,
 } from "../../src/database/vehicle-database";
 import { getUserVehicles } from "../../src/service/get-user-vehicles.service";
@@ -9,7 +9,7 @@ describe(`SERVICE: get-user-vehicles test`, () => {
   let vehicleDatabase: VehicleDatabase;
 
   beforeAll(async () => {
-    vehicleDatabase = new InMemoryVehicle();
+    vehicleDatabase = new InMemoryVehicleImpl();
 
     const input = [
       {

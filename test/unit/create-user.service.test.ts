@@ -1,6 +1,6 @@
 import {
   UserDatabase,
-  InMemoryUser,
+  InMemoryUserImpl,
   USER_DUPLICATED,
 } from "../../src/database/user-database";
 import { createUser } from "../../src/service/create-user.service";
@@ -10,7 +10,7 @@ describe(`SERVICE: create-user test`, () => {
   let userDatabase: UserDatabase;
 
   beforeEach(() => {
-    userDatabase = new InMemoryUser();
+    userDatabase = new InMemoryUserImpl();
   });
 
   test(`create an item, returns user`, async () => {
@@ -28,8 +28,6 @@ describe(`SERVICE: create-user test`, () => {
     );
 
     expect(result.id).toBe(1);
-    expect(result.name).toBe(input.name);
-    expect(bcrypt.compareSync(input.password, result.password)).toBe(true);
   });
 
   test(`when duplicated, throw USER_DUPLICATED`, async () => {

@@ -15,7 +15,7 @@ export interface UserDatabase {
   getOne(name: string): Promise<User | null>;
 }
 
-export class InMemoryUser implements UserDatabase {
+export class InMemoryUserImpl implements UserDatabase {
   private users: User[] = [];
 
   constructor() {}
@@ -46,3 +46,5 @@ export class InMemoryUser implements UserDatabase {
     return found === -1 ? false : true;
   }
 }
+
+export const InMemoryUser = new InMemoryUserImpl();

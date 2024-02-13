@@ -1,6 +1,5 @@
 import { SALT_ROUNDS } from "../constant";
 import { USER_DUPLICATED, UserDatabase } from "../database/user-database";
-import { User } from "../types/user";
 import bcrypt from "bcrypt";
 
 type CreateUserInput = {
@@ -8,7 +7,7 @@ type CreateUserInput = {
   password: string;
 };
 
-type CreateUserOutput = Promise<User>;
+type CreateUserOutput = Promise<{ id: number }>;
 
 export async function createUser(
   params: CreateUserInput,
@@ -28,5 +27,7 @@ export async function createUser(
     throw new Error(`INTERNAL SERVER ERROR`);
   }
 
-  return created;
+  return {
+    id: created.id,
+  };
 }

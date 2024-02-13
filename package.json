@@ -10,7 +10,8 @@
     "build": "NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --project tsconfig.json --noEmit",
     "lint": "eslint '**/*.ts' --fix",
     "format": "prettier --write \"**/*.ts\"",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "local": "ENV=local ts-node src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -34,10 +35,12 @@
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tspec": "^0.1.112"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1"
   }
 }
