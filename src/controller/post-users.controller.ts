@@ -47,7 +47,7 @@ export const postUsersController: PostUsersController = async function (
   } catch (error) {
     if (error instanceof Error) {
       if (error.message === USER_DUPLICATED) {
-        res.status(409).json({ errorMessage: USER_DUPLICATED });
+        return res.status(409).json({ errorMessage: USER_DUPLICATED });
       }
     }
 

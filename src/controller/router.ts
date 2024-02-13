@@ -4,14 +4,18 @@ import {
   postUsersController,
 } from "./post-users.controller";
 import { body } from "express-validator";
+import {
+  POST_USERS_AUTHENTICATION_CONTROLLER,
+  postUsersAuthenticationController,
+} from "./post-users-authentication.controller";
 
 export function router(app: Express) {
   app.post(
     POST_USERS_CONTROLLER,
+    body("name").isString(),
     body("password")
       .isString()
       .custom((input: string) => {
-        console.log(input);
         if (input.length < 10) {
           throw new Error("password should be more than 10 letters");
         }
@@ -19,5 +23,12 @@ export function router(app: Express) {
         return true;
       }),
     postUsersController,
+  );
+
+  app.post(
+    POST_USERS_AUTHENTICATION_CONTROLLER,
+    body("name").isString(),
+    body("password").isString(),
+    postUsersAuthenticationController,
   );
 }

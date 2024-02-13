@@ -4,12 +4,15 @@ import {
 } from "../../src/database/user-database";
 import { createUser } from "../../src/service/create-user.service";
 import { authenticateUser } from "../../src/service/authenticate-user.service";
+import { JWT, jwtImpl } from "../../src/lib/jwt";
 
 describe(`SERVICE: create-user test`, () => {
   let userDatabase: UserDatabase;
+  let jwt: JWT;
 
   beforeEach(() => {
     userDatabase = new InMemoryUserImpl();
+    jwt = jwtImpl;
   });
 
   test(`create an item, successfully authenticate the user`, async () => {
@@ -34,9 +37,13 @@ describe(`SERVICE: create-user test`, () => {
         password: input.password,
       },
       userDatabase,
+      jwt,
     );
 
-    expect(authenticated.id).toBe(1);
+    const verified = jwt.verify(authenticated);
+
+    expect(verified.id).toBe(1);
+    expect(verified.name).toBe(input.name);
   });
 
   test(`create an item, not found the user`, async () => {
@@ -62,6 +69,7 @@ describe(`SERVICE: create-user test`, () => {
           password: input.password,
         },
         userDatabase,
+        jwt,
       );
     } catch (error) {
       expect(error).toStrictEqual(Error(`NOT FOUND ERROR`));
@@ -91,6 +99,7 @@ describe(`SERVICE: create-user test`, () => {
           password: "wrong password",
         },
         userDatabase,
+        jwt,
       );
     } catch (error) {
       expect(error).toStrictEqual(Error(`WRONG PASSWORD`));
