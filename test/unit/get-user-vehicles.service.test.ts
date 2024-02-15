@@ -49,7 +49,7 @@ describe(`SERVICE: get-user-vehicles test`, () => {
     };
 
     const result = await getUserVehicles(
-      { userId: input.userId, vehicleId: null },
+      { userId: input.userId, vehicleId: null, type: "multiple" },
       vehicleDatabase,
     );
 
@@ -65,7 +65,7 @@ describe(`SERVICE: get-user-vehicles test`, () => {
     };
 
     const result = await getUserVehicles(
-      { userId: input.userId, vehicleId: input.vehicleId },
+      { userId: input.userId, vehicleId: input.vehicleId, type: "single" },
       vehicleDatabase,
     );
 
@@ -79,7 +79,7 @@ describe(`SERVICE: get-user-vehicles test`, () => {
     };
 
     const result = await getUserVehicles(
-      { userId: input.userId, vehicleId: null },
+      { userId: input.userId, vehicleId: null, type: "multiple" },
       vehicleDatabase,
     );
 
@@ -93,7 +93,7 @@ describe(`SERVICE: get-user-vehicles test`, () => {
     };
 
     const result = await getUserVehicles(
-      { userId: input.userId, vehicleId: input.vehicleId },
+      { userId: input.userId, vehicleId: input.vehicleId, type: "single" },
       vehicleDatabase,
     );
 
