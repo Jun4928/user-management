@@ -4,7 +4,6 @@ import {
   USER_DUPLICATED,
 } from "../../src/database/user-database";
 import { createUser } from "../../src/service/create-user.service";
-import bcrypt from "bcrypt";
 
 describe(`SERVICE: create-user test`, () => {
   let userDatabase: UserDatabase;
