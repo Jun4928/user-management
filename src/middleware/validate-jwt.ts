@@ -7,6 +7,7 @@ export async function validateJwt(
   res: Response,
   next: NextFunction,
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [bearer, token] = req.headers.authorization?.split(" ") ?? [
     "",
     "INVALID_TOKEN",
