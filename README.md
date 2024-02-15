@@ -24,7 +24,7 @@ npm run docker:down
 
 ## Issues
 
-Thw work history follows the issues below
+The work history follows the issues below
 
 - [setup: install required dependencies and initial setup #1](https://github.com/Jun4928/user-management/issues/1)
 - [feature: vehicle preferences #3](https://github.com/Jun4928/user-management/issues/3)
