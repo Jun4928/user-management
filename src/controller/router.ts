@@ -1,9 +1,9 @@
 import { Express } from "express";
+import { body, param } from "express-validator";
 import {
   POST_USERS_CONTROLLER,
   postUsersController,
 } from "./post-users.controller";
-import { body, param } from "express-validator";
 import {
   POST_USERS_AUTHENTICATION_CONTROLLER,
   postUsersAuthenticationController,
@@ -16,7 +16,12 @@ import { validateJwt } from "../middleware/validate-jwt";
 import {
   GET_USERS_VEHICLES_VEHICLE_ID_CONTROLLER,
   getUsersVehiclesVehicleIdController,
-} from "./get-users-vehicle-vehicle-id.controller";
+} from "./get-users-vehicles-vehicle-id.controller";
+import {
+  POST_USERS_VEHICLES,
+  postUsersVehiclesController,
+} from "./post-users-vehicles.controller";
+import { FOUR_DIGITS_YEAR } from "./internal/regexp";
 
 export function router(app: Express) {
   app.post(
@@ -49,8 +54,29 @@ export function router(app: Express) {
 
   app.get(
     GET_USERS_VEHICLES_VEHICLE_ID_CONTROLLER,
-    param("vehicleId").isString().isNumeric(),
     validateJwt as any,
+    param("vehicleId")
+      .isString()
+      .customSanitizer((v) => Number(v)),
     getUsersVehiclesVehicleIdController,
+  );
+
+  app.post(
+    POST_USERS_VEHICLES,
+    validateJwt as any,
+    body("brand").isString(),
+    body("model").isString(),
+    body("year").custom((v: unknown) => {
+      if (typeof v !== "number") {
+        throw new Error(`${v} should be number`);
+      }
+
+      if (FOUR_DIGITS_YEAR.test(v.toString()) === false) {
+        throw new Error(`${v} should be four digits`);
+      }
+
+      return true;
+    }),
+    postUsersVehiclesController,
   );
 }

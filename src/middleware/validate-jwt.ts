@@ -18,7 +18,6 @@ export async function validateJwt(
     res.locals.authenticatedUser = foundUser;
     next();
   } catch (error) {
-    res.locals.authenticatedUser = null;
-    next();
+    return res.status(401).json({ errorMessage: "Not Authenticated" });
   }
 }

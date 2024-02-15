@@ -30,10 +30,6 @@ export type GetUsersVehiclesVehicleIdControllerApiSpec = Tspec.DefineApiSpec<{
 
 export const getUsersVehiclesVehicleIdController: GetUsersVehiclesVehicleIdController =
   async function (req, res) {
-    if (res.locals.authenticatedUser == null) {
-      return res.status(401).json({ errorMessage: "Not Authenticated" });
-    }
-
     const vehicle = await getUserVehicles(
       {
         type: "single",

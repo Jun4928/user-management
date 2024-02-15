@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { RequestHandler } from "express";
 import { EmptyObject } from "../types/utility-types";
 import { Tspec } from "tspec";
