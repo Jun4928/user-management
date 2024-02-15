@@ -22,7 +22,7 @@
     "useDefineForClassFields": false,
     // app
     "allowJs": true,
-    "outDir": ".build",
+    "outDir": ".dist",
     "sourceMap": true,
     "declaration": true,
     "rootDir": "./"
