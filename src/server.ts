@@ -1,12 +1,13 @@
 // initial setup
 
 import { initExpressApp } from "./app";
+import { PORT } from "./constant";
 
 async function start() {
   const app = await initExpressApp();
 
-  const server = app.listen(3000, () => {
-    console.info(`Docs can be found on http://localhost:3000/docs`);
+  const server = app.listen(PORT, () => {
+    console.info(`Docs can be found on http://localhost:${PORT}/docs`);
   });
 
   process.on("SIGINT", async () => {
