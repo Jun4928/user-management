@@ -35,4 +35,6 @@ Thw work history follows the issues below
 
 ## Future Works
 
+- integration tests for APIs and authentication
 - JWT Expiration and Refresh Tokens
+
