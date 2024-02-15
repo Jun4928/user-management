@@ -21,7 +21,11 @@ import {
   POST_USERS_VEHICLES,
   postUsersVehiclesController,
 } from "./post-users-vehicles.controller";
-import { FOUR_DIGITS_YEAR } from "./internal/regexp";
+import {
+  FOUR_DIGITS_YEAR,
+  PASSWORD,
+  PASSWORD_DETAILS,
+} from "./internal/regexp";
 import {
   PUT_USERS_VEHICLES_VEHICLE_ID_CONTROLLER,
   putUsersVehiclesVehicleIdController,
@@ -38,8 +42,15 @@ export function router(app: Express) {
     body("password")
       .isString()
       .custom((input: string) => {
-        if (input.length < 10) {
-          throw new Error("password should be more than 10 letters");
+        if (!PASSWORD.test(input)) {
+          const errors: string[] = [];
+          Object.values(PASSWORD_DETAILS).forEach(([regexp, errorMessage]) => {
+            if (!regexp.test(input)) {
+              errors.push(errorMessage);
+            }
+          });
+
+          throw Error(`${errors.join(`, `)}`);
         }
 
         return true;
